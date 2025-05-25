@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+    <h1>Credit Risk</h1>
+    <body>
+        <link rel="stylesheet" href="{% static 'static/services.html' %}">
+        <form action="loan_status" method="POST">
+            {% csrf_token %}
+            <label for="loan_grade">Choose a loan_grade</label>
+            <select name="loan_grade" id="loan_grade" name="loan grade" required>
+            <! select name="loan_grade" class="form-control">
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="E">E</option>
+                <option value="F">F</option>
+                <option value="G">G</option>
+            </select>
+            <label for="default_on_file">Choose default on file</label>
+                <select name="default_on_file" id="default_on_file" name="default_on_file" required>
+                    <option value="Y">Y</option>
+                    <option value="N">N</option>
+            </select>
+            
+            <button>Submit</button><br>
+        </form>
+    <label for="prediction">Risk</label>
+    {% if credit_risk %}
+        <li>Credit Risk:{{credit_risk}}</li>
+    {% endif %}
+    </body>
+</html>
