@@ -8,4 +8,7 @@ class Borrower(models.Model):
         db_table = 'Borrower'
 
 class Plots(models.Model):
-    plot = models.ImageField()
+    name = models.CharField(max_length=100)
+    plot = models.ImageField(upload_to='plots/')
+    class Meta:
+        db_table = 'Plots'

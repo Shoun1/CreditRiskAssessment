@@ -1,3 +1,4 @@
+import io
 import pandas as pd
 import numpy as np
 import seaborn as sns
@@ -7,6 +8,10 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.tree import plot_tree
 from sklearn.metrics import accuracy_score,classification_report
 from sklearn.preprocessing import OneHotEncoder
+from django.core.files.base import ContentFile
+# credit_risk_assessment.py
+
+from .models import * # Replace 'visualizer' with your actual app name
 
 def load_data():
     df = pd.read_csv('/home/shoun1/risk_assessment/risk_assessment/credit_risk_dataset.csv')
@@ -39,8 +44,21 @@ def preprocess_data(data):
 def train_model(X_train_new,Y_train):
     clf = DecisionTreeClassifier()
     clf.fit(X_train_new,Y_train)
-    tree=plot_tree(clf,feature_names=['A','B','C','D','E','F','G','Y','N'],class_names=['0','1'],filled=True)
-    return clf,tree
+    fig, ax = plt.subplots(figsize=(12, 8))
+    plot_tree(clf,feature_names=['A','B','C','D','E','F','G','Y','N'],class_names=['0','1'],filled=True)
+    buf = io.BytesIO()
+    fig.savefig(buf, format='png')
+    buf.seek(0)
+
+    # Create and save the model instance
+    tree_image = Plots(name='my_tree_plot')
+    tree_image.save()
+    tree_image.save('tree_plot.png', ContentFile(buf.read()))
+    tree_image.save()
+
+    buf.close()
+    plt.close(fig)         
+    return clf,tree_image
 
 def predict(clf,grade,defaulter):
     X_new = np.zeros((1,9))

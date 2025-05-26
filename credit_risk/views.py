@@ -2,11 +2,18 @@ from django.shortcuts import render
 from .models import *
 from django.http import HttpResponse
 from .credit_risk_assessment import load_data,train_model,predict,preprocess_data
+
 #import credit_risk_assessment.py
 data = load_data()
+
 X_train_new,X_test_new,Y_train = preprocess_data(data)
+
 clf,tree = train_model(X_train_new,Y_train)
+
 print("Hello World")
+
+
+
 # Create your views here.
 def index(request):
     return render(request,'index.html')
@@ -33,5 +40,6 @@ def loan_status(request):
 def show_tree(request):
     return render(request,'show.html')
 
-def show_tree(request):
-    return render(request,'show.html',{'tree':tree})
+def show_tree(request,plot_id):
+    plot = get_object_or_404(Plots,pk='plot_id')
+    return render(request,'show.html',{'plot': plot})
