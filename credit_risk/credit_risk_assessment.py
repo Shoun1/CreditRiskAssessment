@@ -44,18 +44,17 @@ def preprocess_data(data):
 def train_model(X_train_new,Y_train):
     clf = DecisionTreeClassifier()
     clf.fit(X_train_new,Y_train)
+    
+    buf = io.BytesIO()
     fig, ax = plt.subplots(figsize=(12, 8))
     plot_tree(clf,feature_names=['A','B','C','D','E','F','G','Y','N'],class_names=['0','1'],filled=True)
-    buf = io.BytesIO()
     fig.savefig(buf, format='png')
     buf.seek(0)
 
     # Create and save the model instance
     tree_image = Plots(name='my_tree_plot')
+    #tree_image.save('tree_plot.png', ContentFile(buf.read()))
     tree_image.save()
-    tree_image.save('tree_plot.png', ContentFile(buf.read()))
-    tree_image.save()
-
     buf.close()
     plt.close(fig)         
     return clf,tree_image
