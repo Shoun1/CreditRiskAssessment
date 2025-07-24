@@ -1,4 +1,5 @@
 import pandas as pd
+import os
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -9,8 +10,14 @@ from sklearn.metrics import accuracy_score,classification_report
 from sklearn.preprocessing import OneHotEncoder
 
 def load_data():
-    df = pd.read_csv('/home/shoun1/risk_assessment/risk_assessment/credit_risk_dataset.csv')
-    return df
+    try:
+        df = pd.read_csv('D:\pythonenv\risk_assessment\risk_assessment\risk_assessment\credit_risk_dataset.csv')
+        print("Data loaded successfully with shape:", df.shape)
+        return df
+    except FileNotFoundError:
+        print("File not found: D:\pythonenv\risk_assessment\risk_assessment\risk_assessment\credit_risk_dataset.csv")
+        return None
+    
     
 
 def preprocess_data(data):
