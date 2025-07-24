@@ -9,10 +9,6 @@ from sklearn.tree import plot_tree
 from sklearn.metrics import accuracy_score,classification_report
 from sklearn.preprocessing import OneHotEncoder
 import os
-print("os.name:", os.name)
-print("Current working directory:", os.getcwd())
-print("Script location (__file__):", __file__)
-
 import pandas as pd
 
 file_path = r'd:\pythonenv\risk_assessment\risk_assessment\credit_risk\credit_risk_data.csv'
