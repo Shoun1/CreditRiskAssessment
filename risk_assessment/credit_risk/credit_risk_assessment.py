@@ -8,17 +8,23 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.tree import plot_tree
 from sklearn.metrics import accuracy_score,classification_report
 from sklearn.preprocessing import OneHotEncoder
+import os
+print("os.name:", os.name)
+print("Current working directory:", os.getcwd())
+print("Script location (__file__):", __file__)
 
-def load_data():
-    try:
-        df = pd.read_csv('D:\pythonenv\risk_assessment\risk_assessment\risk_assessment\credit_risk_dataset.csv')
-        print("Data loaded successfully with shape:", df.shape)
-        return df
-    except FileNotFoundError:
-        print("File not found: D:\pythonenv\risk_assessment\risk_assessment\risk_assessment\credit_risk_dataset.csv")
-        return None
-    
-    
+import pandas as pd
+
+file_path = r'd:\pythonenv\risk_assessment\risk_assessment\credit_risk\credit_risk_data.csv'
+
+try:
+    df = pd.read_csv(file_path)
+    print("✅ Data loaded:", df.shape)
+except FileNotFoundError:
+    print("❌ File not found at:", file_path)
+except Exception as e:
+    print("❌ Other error:", e)
+
 
 def preprocess_data(data):
     #remove missing values 
