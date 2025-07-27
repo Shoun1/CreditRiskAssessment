@@ -15,11 +15,11 @@ file_path = r'd:\pythonenv\risk_assessment\risk_assessment\credit_risk\credit_ri
 
 try:
     df = pd.read_csv(file_path)
-    print("✅ Data loaded:", df.shape)
+    print("Data loaded:", df.shape)
 except FileNotFoundError:
-    print("❌ File not found at:", file_path)
+    print(" File not found at:", file_path)
 except Exception as e:
-    print("❌ Other error:", e)
+    print(" Other error:", e)
 
 
 def preprocess_data(data):
